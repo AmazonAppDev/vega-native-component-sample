@@ -30,6 +30,21 @@ using namespace apmf::iface::com::amazon::kepler::uitoolkit::view;
 // - isLiveRegion makes a polite live region: a change to the label is
 //   announced without the view needing focus.
 //
+// Use live regions sparingly. They are meant for critical alerts (for example
+// "Incorrect password. Your account will be locked after three failed login
+// attempts", assertive) or important notifications (for example "Your cart
+// subtotal has been updated", polite). Do not use one to force the screen
+// reader to speak ordinary app content the customer can reach through normal
+// focus navigation; that makes the experience noisy and frustrating.
+//
+// It is appropriate in this sample only because the card is not focusable, and
+// it changes as a result of activating the Previous/Next buttons, which are the
+// elements under focus. The usual alternative, a "describedBy" relationship
+// from a focusable element (such as a "Watch now" button) to the content, does
+// not fit here because the Previous/Next buttons are not semantically related
+// to the card's text. If the content can be reached through focus, prefer
+// that instead.
+//
 // After changing the label, call IAccessibilityService::invalidate(view) so the
 // delegate is asked to rebuild.
 struct LabelAccessibilityDelegate

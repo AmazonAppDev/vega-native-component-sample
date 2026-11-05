@@ -38,13 +38,12 @@ export const App = () => {
 
   const selectedImage = images[index];
 
-  // What a screen reader says when the card changes: title, genre and year.
-  // The description is left out because live-region text should stay short, and
-  // symbols such as the bullet and slash would otherwise be read aloud.
-  const cardLabel = `${selectedImage.title}. ${selectedImage.meta.replace(
-    /\s*[•/]\s*/g,
-    ', ',
-  )}`;
+  // What a screen reader says when the card changes. It carries everything a
+  // sighted user sees (title, genre/year and description) so VoiceView users
+  // can make the same content decisions. The meta text is passed through
+  // unmodified: punctuation such as the bullet is left for the screen reader to
+  // handle, so the customer's punctuation-level setting is respected.
+  const cardLabel = `${selectedImage.title}. ${selectedImage.meta}. ${selectedImage.description}`;
 
   return (
     <View style={styles.background}>

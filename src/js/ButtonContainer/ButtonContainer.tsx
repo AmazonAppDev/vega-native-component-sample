@@ -76,6 +76,11 @@ export const Button: React.FunctionComponent<ButtonContainerProps> = (
         onSelect={handleSelect}
         onTapped={handleTapped}
         accessible={true}
+        // An explicit label is needed here only because the button's visible
+        // content is a rotated-square chevron, which a screen reader cannot
+        // interpret. Avoid redundant labels in your own buttons: if the button
+        // contains a text child, VoiceView reads that text automatically, so
+        // do not set accessibilityLabel to the same string.
         accessibilityLabel={displayName}
         testID={isNext ? 'button-next' : 'button-last'}>
         <View style={styles.surface}>
